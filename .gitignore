@@ -1,0 +1,12 @@
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.env
+.DS_Store
+
+data/
+notes/
+READMORE.md
+
+sim_result/
+reservoir_plot/
