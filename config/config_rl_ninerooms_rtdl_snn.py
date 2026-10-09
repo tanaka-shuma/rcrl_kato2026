@@ -67,6 +67,7 @@ class Config:
     Irate: float = 0.2         # 抑制性ニューロンの割合
     tca: int = 200             # 細胞内Caイオン濃度の時定数 (ms) 
     const = 2                  # 入力電流乗算定数
+    input_const_snn4 = 0.0005
 
     ### シナプス
     # ネットワーク構造

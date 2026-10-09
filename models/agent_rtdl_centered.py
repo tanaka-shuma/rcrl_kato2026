@@ -88,7 +88,11 @@ class Agent:
         sum = np.zeros(self.Nx)
         sum += self.Wi @ u
         self.reservoir.step(sum) # リザバーの状態更新
-        q_next = self.Wo @ self.reservoir.r # 読み出し
+        # E-neuron calcium features, population-mean centered
+        features = self.reservoir.r.copy()
+        features[:480] -= np.mean(features[:480])
+
+        q_next = self.Wo @ features
         a_next = np.argmax(q_next) # 行動の決定（qが最大の行動を選択）
 
         target = reward
@@ -105,7 +109,7 @@ class Agent:
             self.Wo[self.a]
             + self.eta2()
             * np.tanh(td_error)
-            * self.reservoir.r
+            * features
         )
 
         ### epsilon greedy: 確率epsilonでランダム行動を選択

@@ -240,6 +240,9 @@ class frenchLIF:
             # update variables
             k=int(self._sabs_counter[i]>self._sabs[i])
             self._V[i] += (self._Vrest[i]-self._V[i] + self._Rin[i]*self._Itot[i,k])*self._smem[i]
+            # Experimental variant: cap suprathreshold Euler overshoot.
+            if self._V[i] > self._Vthre[i]:
+                self._V[i] = self._Vthre[i]
             self._c[i] *= self._sca[i]
             for j in range(self.m_gref):
                 self._gref[i,j] *= self._sref[i,j]
